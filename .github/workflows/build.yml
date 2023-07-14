@@ -1,0 +1,20 @@
+name: Build
+on: push
+jobs:
+  node_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install Node Dependencies
+        run: pnpm install
+      - name: Lint
+        run: pnpm --filter='*' lint:report
+        continue-on-error: true
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@v2
+        with:
+          report-json: "{apps,packages}/*/eslint-report.json"

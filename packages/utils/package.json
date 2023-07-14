@@ -1,0 +1,6 @@
+{
+  "name": "utils",
+  "devDependencies": {
+    "eslint": "^8.45.0"
+  }
+}
