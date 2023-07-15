@@ -5,6 +5,8 @@ on:
 jobs:
   node_test:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
     steps:
       - uses: mskelton/setup-pnpm@v1
         with:
