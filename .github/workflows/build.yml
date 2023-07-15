@@ -16,4 +16,4 @@ jobs:
       - name: Annotate Code Linting Results
         uses: mskelton/eslint-annotate-action@glob-testing
         with:
-          report-json: "{apps,packages}/*/eslint-report.json"
+          report-json: "packages/*/eslint-report.json"
