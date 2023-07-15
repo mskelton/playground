@@ -3,10 +3,11 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  node_test:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
+    # permissions:
+    #   checks: write
     steps:
       - uses: mskelton/setup-pnpm@v1
         with:
