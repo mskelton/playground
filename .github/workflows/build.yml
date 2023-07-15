@@ -9,7 +9,7 @@ jobs:
           node-version: '18.x'
           pnpm-version: 8
       - name: Lint
-        run: pnpm --filter='*' lint:report
+        run: pnpm --filter='*' lint:ci
         continue-on-error: true
       - name: Annotate Code Linting Results
         uses: mskelton/eslint-annotate-action@glob
