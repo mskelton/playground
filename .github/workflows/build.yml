@@ -15,11 +15,13 @@ jobs:
           node-version: '18.x'
           pnpm-version: 8
       - name: Lint
-        run: pnpm --filter='*' lint:ci
+        run: pnpm lint:ci
         continue-on-error: true
       - name: Annotate Code Linting Results
         uses: mskelton/eslint-annotate-action@glob-testing
         with:
+          only-pr-files: false
+          markdown-report-on-step-summary: true
           report-json: |
             apps/*/eslint-report.json
             packages/*/eslint-report.json

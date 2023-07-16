@@ -2,7 +2,7 @@
   "name": "utils",
   "scripts": {
     "lint": "eslint .",
-    "lint:ci": "eslint . --format json --output-file eslint-report.json"
+    "lint:ci": "node sleep.js && eslint . --format json --output-file eslint-report.json"
   },
   "devDependencies": {
     "@mskelton/eslint-config": "^8.0.0",

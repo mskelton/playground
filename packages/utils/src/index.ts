@@ -1,2 +1,6 @@
-let hi = 'mark'
-console.log('Hello World!')
+const mark = 'index.ts'
+const hi = {
+  mark: mark,
+}
+
+console.log(hi)

@@ -2,7 +2,10 @@
   "name": "playground",
   "packageManager": "pnpm@8.6.0",
   "scripts": {
-    "lint": "pnpm --filter='*' lint",
-    "lint:ci": "pnpm --filter='*' lint:ci"
+    "lint": "turbo run lint",
+    "lint:ci": "turbo run lint:ci --parallel --continue"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.7"
   }
 }

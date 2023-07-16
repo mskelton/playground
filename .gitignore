@@ -1,2 +1,5 @@
 node_modules/
 eslint-report.json
+
+# Turbo
+turbo*.log
