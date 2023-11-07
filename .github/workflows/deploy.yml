@@ -1,0 +1,19 @@
+name: "Build"
+on: push
+jobs:
+  deploy:
+    strategy:
+      matrix:
+        include:
+          - app: uw-portal
+          - app: mt-portal
+            dir: deprecated-apps/management-tools
+    if: "!startsWith(github.event.head_commit.message, format('Bumped {}', matrix.app))"
+    name: Deploy ${{ matrix.app }} to Staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - run: |
+          echo "./${{ matrix.dir || format('apps/{0}', matrix.app) }}/Dockerfile"
+        shell: bash
