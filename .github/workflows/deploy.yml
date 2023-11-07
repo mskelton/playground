@@ -1,11 +1,13 @@
-name: "Build"
+name: "Deploy"
 on: push
 jobs:
   deploy:
     strategy:
       matrix:
+        app:
+          - uw-portal
+          - outlook-plugin
         include:
-          - app: uw-portal
           - app: mt-portal
             dir: deprecated-apps/management-tools
     if: "!startsWith(github.event.head_commit.message, format('Bumped {}', matrix.app))"
