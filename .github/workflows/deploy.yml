@@ -10,7 +10,6 @@ jobs:
         include:
           - app: mt-portal
             dir: deprecated-apps/management-tools
-    if: "!startsWith(github.event.head_commit.message, format('Bumped {}', matrix.app))"
     name: Deploy ${{ matrix.app }} to Staging
     runs-on: ubuntu-latest
     steps:
