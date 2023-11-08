@@ -27,18 +27,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
       - name: Setup Release Context
+        id: context
         run: |
-          export PACKAGE_JSON_DIR="apps/${{ inputs.service }}"
-          export VERSION_FILES="apps/${{ inputs.service }}/version"
+          echo "PACKAGE_JSON_DIR=apps/${{ inputs.service }}" >> "$GITHUB_OUTPUT"
+          echo "VERSION_FILES=apps/${{ inputs.service }}/version" >> "$GITHUB_OUTPUT"
 
           path="./config/release/${{ inputs.service }}.json"
           if [[ -f "$path" ]]; then
             for s in $(jq -r 'to_entries | map("\(.key)=\(.value|tostring)") | .[]' "$path"); do
-              export $s
+              echo "$s" >> "$GITHUB_OUTPUT"
             done
           fi
       - name: Run action
         uses: ./.github/actions/logger
         with:
-          package_json_dir: "$PACKAGE_JSON_DIR"
-          version_files: "$VERSION_FILES"
+          package_json_dir: ${{ steps.context.outputs.PACKAGE_JSON_DIR }}
+          version_files: ${{ steps.context.outputs.VERSION_FILES }}
