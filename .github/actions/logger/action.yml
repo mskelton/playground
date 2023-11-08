@@ -1,0 +1,14 @@
+name: 'Run Shell Script'
+description: 'Executes a shell script'
+inputs:
+  package_json_dir:
+    description: yo
+  version_files:
+    description: yo
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        echo package.json ${{ inputs.package_json_dir }}
+        echo versions ${{ inputs.version_files }}
+      shell: bash

@@ -1,0 +1,44 @@
+name: Manual Release
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: "Service to release"
+        required: true
+        default: app-1
+        type: choice
+        options:
+          - app-1
+          - app-2
+      releaseType:
+        description: "Release Type"
+        required: true
+        default: "minor"
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+jobs:
+  create-release:
+    name: Create a new release for ${{ inputs.service }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Release Context
+        run: |
+          export PACKAGE_JSON_DIR="apps/${{ inputs.service }}"
+          export VERSION_FILES="apps/${{ inputs.service }}/version"
+
+          path="./config/release/${{ inputs.service }}.json"
+          if [[ -f "$path" ]]; then
+            for s in $(jq -r 'to_entries | map("\(.key)=\(.value|tostring)") | .[]' "$path"); do
+              export $s
+            done
+          fi
+      - name: Run action
+        uses: ./.github/actions/logger
+        with:
+          package_json_dir: "$PACKAGE_JSON_DIR"
+          version_files: "$VERSION_FILES"
