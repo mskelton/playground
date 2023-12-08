@@ -4,8 +4,8 @@ jobs:
   remind:
     name: Changelog Reminder
     runs-on: ubuntu-latest
-    # permissions:
-    #   pull-requests: write
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: mskelton/changelog-reminder-action@v3
