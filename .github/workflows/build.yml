@@ -26,20 +26,18 @@ jobs:
             apps/*/eslint-report.json
             packages/*/eslint-report.json
   release:
-    strategy:
-      matrix:
-        service:
-          - app
-          - foo
     if: startsWith(github.event.head_commit.message, 'Bumped ') && contains(github.event.head_commit.message, ' version to ')
-    name: Build and Push ${{ matrix.service }} Service
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      - name: Read version
-        id: version
+
+      - name: Setup Release Context
+        id: context
         run: |
-          filename="./apps/${{ matrix.service }}/version"
+          service="$(echo '${GITHUB_REF##*/}' | sed -E 's/release\/([^\/]+)\/.*/\1/')"
+          filename="./apps/$service/version"
+
+          echo "$service"
           echo "version=$(cat $filename | tr '\n' ' ' | xargs)"
-          echo "version=$(cat $filename | tr '\n' ' ' | xargs)" >> "$GITHUB_OUTPUT"
