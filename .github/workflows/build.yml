@@ -31,7 +31,7 @@ jobs:
         service:
           - app
           - foo
-    if: startsWith(github.event.head_commit.message, 'Bumped ' + matrix.service + ' version to ')
+    if: startsWith(github.event.head_commit.message, format('Bumped {0} version to ', matrix.service)
     name: Build and Push ${{ matrix.service }} Service
     runs-on: ubuntu-latest
     steps:
