@@ -1,0 +1,14 @@
+{
+  "name": "foo",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:ci": "eslint . --format json --output-file eslint-report.json"
+  },
+  "devDependencies": {
+    "@mskelton/eslint-config": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-sort": "^2.10.0"
+  }
+}

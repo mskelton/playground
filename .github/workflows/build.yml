@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: mskelton/setup-pnpm@v1
         with:
-          node-version: '18.x'
+          node-version: "18.x"
           pnpm-version: 8
       - name: Lint
         run: pnpm lint:ci
@@ -25,3 +25,21 @@ jobs:
           report-json: |
             apps/*/eslint-report.json
             packages/*/eslint-report.json
+  release:
+    strategy:
+      matrix:
+        service:
+          - app
+          - foo
+    if: startsWith(github.event.head_commit.message, 'Bumped ' + matrix.service + ' version to ')
+    name: Build and Push ${{ matrix.service }} Service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Read version
+        id: version
+        run: |
+          filename="./apps/${{ matrix.service }}/version"
+          echo "version=$(cat $filename | tr '\n' ' ' | xargs)"
+          echo "version=$(cat $filename | tr '\n' ' ' | xargs)" >> "$GITHUB_OUTPUT"
