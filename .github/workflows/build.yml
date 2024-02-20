@@ -25,19 +25,3 @@ jobs:
           report-json: |
             apps/*/eslint-report.json
             packages/*/eslint-report.json
-  release:
-    if: startsWith(github.event.head_commit.message, 'Bumped ') && contains(github.event.head_commit.message, ' version to ')
-    name: Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Setup Release Context
-        id: context
-        run: |
-          service="$(echo '${GITHUB_REF##*/}' | sed -E 's/release\/([^\/]+)\/.*/\1/')"
-          filename="./apps/$service/version"
-
-          echo "$service"
-          echo "version=$(cat $filename | tr '\n' ' ' | xargs)"
