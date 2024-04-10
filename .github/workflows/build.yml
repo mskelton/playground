@@ -76,9 +76,9 @@ jobs:
     needs: [test]
     if: always()
     steps:
-      - name: Tests pass
+      - name: Tests passed
         if: ${{ !(contains(needs.*.result, 'failure')) }}
         run: exit 0
-      - name: Tests fail
+      - name: Tests failed
         if: ${{ contains(needs.*.result, 'failure') }}
         run: exit 1
