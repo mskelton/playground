@@ -25,3 +25,47 @@ jobs:
           report-json: |
             apps/*/eslint-report.json
             packages/*/eslint-report.json
+
+  changes:
+    name: Find changed packages
+    runs-on: ubuntu-latest
+    outputs:
+      services: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate filters.yml
+        run: |
+          filename=.github/filters.yml
+
+          for package in packages/*; do
+            echo "$(basename $package):" >> $filename
+            echo "  - $package/**" >> $filename
+            echo "  - package.json" >> $filename
+            echo "  - pnpm-lock.yaml" >> $filename
+          done
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: .github/filters.yml
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: changes
+    if: needs.changes.outputs.services != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        service: ${{ fromJSON(needs.changes.outputs.services) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: mskelton/setup-pnpm@v1
+        with:
+          node-version: "20.x"
+          pnpm-version: 8
+      - name: Test
+        run: pnpm run test --filter='./packages/${{ matrix.service }}'
+        working-directory: ./apps/${{ matrix.service }}
