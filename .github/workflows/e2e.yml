@@ -19,7 +19,7 @@ jobs:
         run: yarn test:e2e
       - name: Playwright report comment
         if: ${{ always() && github.event_name != 'merge_group' }}
-        uses: daun/playwright-report-summary@v3.5.2
+        uses: mskelton/playwright-report-summary@report-improvements
         with:
           report-file: "test-results/playwright-json-report.json"
           report-url: https://example.com
