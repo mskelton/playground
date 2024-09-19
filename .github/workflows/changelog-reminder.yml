@@ -1,0 +1,13 @@
+on: pull_request
+name: Changelog Reminder
+jobs:
+  remind:
+    if: false
+    name: Changelog Reminder
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mskelton/changelog-reminder-action@v3

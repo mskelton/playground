@@ -1,18 +1,8 @@
 on: pull_request
-name: Changelog Reminder
+name: End-to-End Tests
 jobs:
-  remind:
-    if: false
-    name: Changelog Reminder
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: mskelton/changelog-reminder-action@v3
   e2e:
-    name: End-to-end Tests
+    name: End-to-End Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
