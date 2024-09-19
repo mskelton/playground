@@ -1,5 +1,17 @@
 node_modules/
-eslint-report.json
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # Turbo
+.turbo/
 turbo*.log
+
+# ESLint
+eslint-report.json
+
+# Playwright
+test-results/
