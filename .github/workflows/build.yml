@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: .github/workflows/pr.yml
+          sparse-checkout: .github/workflows/
       - name: List files
         run: ls -la .github/workflows
 
