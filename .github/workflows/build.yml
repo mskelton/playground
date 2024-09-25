@@ -11,7 +11,6 @@ jobs:
         with:
           sparse-checkout: |
             .github/workflows/pr.yml
-          sparse-checkout-cone-mode: false
       - name: List files
         run: ls -la
 
