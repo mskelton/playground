@@ -9,10 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          sparse-checkout: |
-            .github/workflows/pr.yml
+          sparse-checkout: .github/workflows/pr.yml
       - name: List files
-        run: ls -la
+        run: ls -la .github/workflows
 
   lint:
     name: Lint
