@@ -3,6 +3,16 @@ on:
   push:
   workflow_dispatch:
 jobs:
+  sparse:
+    name: Sparse Checkout
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/
+      - name: List files
+        run: ls -la
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
