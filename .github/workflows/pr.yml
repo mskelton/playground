@@ -2,6 +2,7 @@ on: pull_request
 name: Changelog Reminder
 jobs:
   remind:
+    if: false
     name: Changelog Reminder
     runs-on: ubuntu-latest
     permissions:
