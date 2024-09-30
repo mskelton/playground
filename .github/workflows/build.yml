@@ -13,6 +13,11 @@ jobs:
       - uses: mskelton/setup-yarn@v2
         with:
           node-version: "18.x"
+      - name: Install
+        run: |
+          declare -A packages
+          packages[mark]=apps/mark
+          echo "${packages[@]}"
       - name: Lint
         run: yarn lint:ci
         continue-on-error: true
