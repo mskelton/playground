@@ -92,12 +92,3 @@ jobs:
       - uses: mskelton/setup-yarn@v3
         with:
           node-version: "20.x"
-      - name: Playwright report comment
-        if: ${{ always() && github.event_name != 'merge_group' }}
-        uses: daun/playwright-report-summary@v3.5.2
-        with:
-          report-file: "test-results/playwright-json-report.json"
-          report-url: https://example.com
-          comment-title: "Playwright test results"
-          test-command: "yarn test:e2e"
-          job-summary: true
