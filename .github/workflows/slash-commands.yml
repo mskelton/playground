@@ -7,5 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.event.comment.body, '/')
     steps:
-      - run: |
-          echo "${{ github.event }}"
+      - name: Stringify github.event
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const event = JSON.stringify(context.payload, null, 2);
+            console.log(event);
+            return event;
+          result-encoding: string
+        id: stringify-event
+
+      - name: Output Stringified Event
+        run: echo "${{ steps.stringify-event.outputs.result }}"
