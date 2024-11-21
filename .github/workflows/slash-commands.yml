@@ -1,0 +1,13 @@
+name: Slash Commands
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  slash-commands:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.comment.body, '/')
+    steps:
+      - run: |
+          echo "${{ github.head_ref }}"
+          echo "${{ github.ref }}"
+          echo "${{ github.event.client_payload }}"
